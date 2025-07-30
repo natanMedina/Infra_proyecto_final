@@ -3,6 +3,7 @@ import StatsSummary from "../components/sentiment/StatsSummary";
 import FilteredReturns from "../components/sentiment/FilteredReturns";
 import InteractivePlot from "../components/sentiment/InteractivePlot";
 import RecalculateForm from "../components/sentiment/RecalculateForm";
+import { TrendingUp, BarChart3, Target, Users } from "lucide-react";
 
 const SentimentPage = () => {
   const [criterioActivo, setCriterioActivo] = useState(() => {
@@ -14,27 +15,83 @@ const SentimentPage = () => {
   }, [criterioActivo]);
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto">
-      <h2 className="text-3xl font-bold text-blue-800 mt-4 dark:text-white">
-        Análisis de Sentimiento Financiero
-      </h2>
+    <div className="space-y-8">
+      {/* Header con gradiente */}
+      <div className="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl p-8 text-white shadow-xl">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="p-3 bg-white/20 rounded-xl">
+            <TrendingUp className="w-8 h-8" />
+          </div>
+          <div>
+            <h2 className="text-4xl font-bold">Análisis de Mercado Social</h2>
+            <p className="text-emerald-100 text-lg">
+              Estrategias basadas en sentimiento de redes sociales
+            </p>
+          </div>
+        </div>
 
-      <h3 className="text-xl font-medium text-gray-600 dark:text-gray-300">
-        Criterio actual: <span className="text-black dark:text-white font-semibold">{criterioActivo}</span>
-      </h3>
-
-      <RecalculateForm
-        onSuccess={() => { }}
-        onCriterioChange={(nuevoCriterio) => setCriterioActivo(nuevoCriterio)}
-      />
-
-      <StatsSummary />
-      <div>
-        <h3 className="text-xl font-semibold mb-2">Gráfico de Retornos Acumulados</h3>
-        <InteractivePlot />
+        <div className="flex items-center gap-4 bg-white/10 rounded-xl p-4">
+          <Target className="w-5 h-5 text-emerald-200" />
+          <span className="text-emerald-100">Criterio de selección:</span>
+          <span className="font-bold text-white bg-emerald-600 px-3 py-1 rounded-full">
+            {criterioActivo.replace("_", " ").toUpperCase()}
+          </span>
+        </div>
       </div>
 
-      <FilteredReturns />
+      {/* Contenido principal */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Panel izquierdo */}
+        <div className="lg:col-span-2 space-y-6">
+          <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-emerald-100 dark:border-slate-700">
+            <div className="flex items-center gap-3 mb-4">
+              <BarChart3 className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
+                Configuración de Estrategia
+              </h3>
+            </div>
+            <RecalculateForm
+              onSuccess={() => {}}
+              onCriterioChange={(nuevoCriterio) =>
+                setCriterioActivo(nuevoCriterio)
+              }
+            />
+          </div>
+
+          <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-emerald-100 dark:border-slate-700">
+            <div className="flex items-center gap-3 mb-4">
+              <TrendingUp className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
+                Evolución del Portafolio
+              </h3>
+            </div>
+            <InteractivePlot />
+          </div>
+        </div>
+
+        {/* Panel derecho */}
+        <div className="space-y-6">
+          <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-emerald-100 dark:border-slate-700">
+            <div className="flex items-center gap-3 mb-4">
+              <Users className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+              <h3 className="text-xl font-bold text-gray-800 dark:text-white">
+                Métricas Clave
+              </h3>
+            </div>
+            <StatsSummary />
+          </div>
+
+          <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-emerald-100 dark:border-slate-700">
+            <div className="flex items-center gap-3 mb-4">
+              <Target className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+              <h3 className="text-xl font-bold text-gray-800 dark:text-white">
+                Filtros Avanzados
+              </h3>
+            </div>
+            <FilteredReturns />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
