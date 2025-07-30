@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import StatsSummary from "../components/sentiment/StatsSummary";
 import FilteredReturns from "../components/sentiment/FilteredReturns";
-import InteractivePlot from "../components/sentiment/InteractivePlot";
 import RecalculateForm from "../components/sentiment/RecalculateForm";
 import { TrendingUp, BarChart3, Target, Users } from "lucide-react";
 
@@ -40,9 +39,9 @@ const SentimentPage = () => {
       </div>
 
       {/* Contenido principal */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Panel izquierdo */}
-        <div className="lg:col-span-2 space-y-6">
+      <div className="space-y-8">
+        {/* Fila superior - Configuración y Métricas lado a lado */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="bg-slate-800 rounded-2xl p-6 shadow-lg border border-slate-700">
             <div className="flex items-center gap-3 mb-4">
               <BarChart3 className="w-6 h-6 text-emerald-400" />
@@ -60,34 +59,20 @@ const SentimentPage = () => {
 
           <div className="bg-slate-800 rounded-2xl p-6 shadow-lg border border-slate-700">
             <div className="flex items-center gap-3 mb-4">
-              <Target className="w-6 h-6 text-emerald-400" />
-              <h3 className="text-2xl font-bold text-white">
-                Filtros Avanzados
-              </h3>
-            </div>
-            <FilteredReturns />
-          </div>
-        </div>
-
-        {/* Panel derecho */}
-        <div className="space-y-6">
-          <div className="bg-slate-800 rounded-2xl p-6 shadow-lg border border-slate-700">
-            <div className="flex items-center gap-3 mb-4">
               <Users className="w-6 h-6 text-emerald-400" />
-              <h3 className="text-xl font-bold text-white">Métricas Clave</h3>
+              <h3 className="text-2xl font-bold text-white">Métricas Clave</h3>
             </div>
             <StatsSummary />
           </div>
+        </div>
 
-          <div className="bg-slate-800 rounded-2xl p-6 shadow-lg border border-slate-700">
-            <div className="flex items-center gap-3 mb-4">
-              <TrendingUp className="w-6 h-6 text-emerald-400" />
-              <h3 className="text-xl font-bold text-white">
-                Evolución del Portafolio
-              </h3>
-            </div>
-            <InteractivePlot />
+        {/* Fila inferior - Filtros Avanzados ocupando todo el ancho */}
+        <div className="bg-slate-800 rounded-2xl p-6 shadow-lg border border-slate-700">
+          <div className="flex items-center gap-3 mb-4">
+            <Target className="w-6 h-6 text-emerald-400" />
+            <h3 className="text-2xl font-bold text-white">Filtros Avanzados</h3>
           </div>
+          <FilteredReturns />
         </div>
       </div>
     </div>

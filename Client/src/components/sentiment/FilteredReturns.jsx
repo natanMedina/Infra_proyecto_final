@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { getAvailableDates, getFilteredReturns, downloadFilteredReturnsCSV } from "../../api/sentimentAPI";
+import {
+  getAvailableDates,
+  getFilteredReturns,
+  downloadFilteredReturnsCSV,
+} from "../../api/sentimentAPI";
 import InteractivePlot from "./InteractivePlot";
 import DateFilter from "./DateFilter";
 import FilteredReturnsTable from "./FilteredReturnsTable";
@@ -18,7 +22,10 @@ const FilteredReturns = () => {
         setStartDate(res.data.dates[0]);
         setEndDate(res.data.dates[res.data.dates.length - 1]);
 
-        return getFilteredReturns(res.data.dates[0], res.data.dates[res.data.dates.length - 1]);
+        return getFilteredReturns(
+          res.data.dates[0],
+          res.data.dates[res.data.dates.length - 1]
+        );
       })
       .then((res) => setFilteredData(res.data))
       .catch((err) => console.error("Error inicial:", err));
@@ -39,9 +46,7 @@ const FilteredReturns = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mt-6 space-y-6">
-      <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Filtrar Retornos</h3>
-
+    <div className="space-y-6">
       <DateFilter
         dates={dates}
         startDate={startDate}
@@ -56,7 +61,7 @@ const FilteredReturns = () => {
       <div className="flex justify-start">
         <button
           onClick={handleExport}
-          className="bg-green-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-green-700 transition"
+          className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-3 rounded-xl font-semibold hover:from-emerald-600 hover:to-teal-600 transition-all shadow-lg"
         >
           Exportar CSV
         </button>
