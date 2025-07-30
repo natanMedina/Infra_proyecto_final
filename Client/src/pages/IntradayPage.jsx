@@ -118,10 +118,10 @@ const IntradayPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Panel izquierdo */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-purple-100 dark:border-slate-700">
+          <div className="bg-slate-800 rounded-2xl p-6 shadow-lg border border-slate-700">
             <div className="flex items-center gap-3 mb-4">
-              <Play className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-              <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
+              <Play className="w-6 h-6 text-purple-400" />
+              <h3 className="text-2xl font-bold text-white">
                 Ejecutar Estrategia
               </h3>
             </div>
@@ -135,10 +135,10 @@ const IntradayPage = () => {
             </button>
           </div>
 
-          <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-purple-100 dark:border-slate-700">
+          <div className="bg-slate-800 rounded-2xl p-6 shadow-lg border border-slate-700">
             <div className="flex items-center gap-3 mb-4">
-              <TrendingUp className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-              <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
+              <TrendingUp className="w-6 h-6 text-purple-400" />
+              <h3 className="text-2xl font-bold text-white">
                 Rendimiento de la Estrategia
               </h3>
             </div>
@@ -166,58 +166,56 @@ const IntradayPage = () => {
 
         {/* Panel derecho */}
         <div className="space-y-6">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-purple-100 dark:border-slate-700">
+          <div className="bg-slate-800 rounded-2xl p-6 shadow-lg border border-slate-700">
             <div className="flex items-center gap-3 mb-4">
-              <Calendar className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-              <h3 className="text-xl font-bold text-gray-800 dark:text-white">
+              <Calendar className="w-6 h-6 text-purple-400" />
+              <h3 className="text-xl font-bold text-white">
                 Selección de Fechas
               </h3>
             </div>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Fecha de inicio
                 </label>
                 <input
                   type="date"
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                  className="w-full px-4 py-2 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-slate-700 text-white"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Fecha de fin
                 </label>
                 <input
                   type="date"
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                  className="w-full px-4 py-2 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-slate-700 text-white"
                 />
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-purple-100 dark:border-slate-700">
+          <div className="bg-slate-800 rounded-2xl p-6 shadow-lg border border-slate-700">
             <div className="flex items-center gap-3 mb-4">
-              <Download className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-              <h3 className="text-xl font-bold text-gray-800 dark:text-white">
-                Descargar Datos
-              </h3>
+              <Download className="w-6 h-6 text-purple-400" />
+              <h3 className="text-xl font-bold text-white">Descargar Datos</h3>
             </div>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Tipo de retorno
                 </label>
                 <select
                   value={tipoRetorno}
                   onChange={(e) => setTipoRetorno(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                  className="w-full px-4 py-2 border border-slate-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-slate-700 text-white"
                 >
                   <option value="acumulado">Retorno Acumulado</option>
                   <option value="diario">Retorno Diario</option>
