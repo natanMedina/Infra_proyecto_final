@@ -73,10 +73,10 @@ def generar_senal_diaria(df):
     df['prediction_premium'] = (df['predictions'] - df['variance']) / df['variance']
     df['premium_std'] = df['prediction_premium'].rolling(180).std()
 
-    # Generamos señal diaria si el "premium" es significativo
+    # Generamos señal diaria con umbral más bajo (1.0 en lugar de 1.5)
     df['signal_daily'] = df.apply(
-        lambda x: 1 if x['prediction_premium'] > 1.5 * x['premium_std'] else 
-                  (-1 if x['prediction_premium'] < -1.5 * x['premium_std'] else np.nan),
+        lambda x: 1 if x['prediction_premium'] > 1.0 * x['premium_std'] else 
+                  (-1 if x['prediction_premium'] < -1.0 * x['premium_std'] else np.nan),
         axis=1
     )
     df['signal_daily'] = df['signal_daily'].shift()  # Shift para evitar lookahead bias
@@ -106,23 +106,26 @@ def generar_senal_intradia(intraday_df, senales_diarias):
     df['lband'] = bb.bollinger_lband()
     df['uband'] = bb.bollinger_hband()
 
-    # Señal intradía basada en RSI y bandas
+    # Señal intradía con condiciones menos restrictivas
     def signal(row):
-        if row['rsi'] > 70 and row['close'] > row['uband']:
-            return 1  # Sobrecompra extrema: señal de venta
-        elif row['rsi'] < 30 and row['close'] < row['lband']:
-            return -1  # Sobreventa extrema: señal de compra
+        # Condiciones más flexibles para generar más señales
+        if row['rsi'] > 65 or row['close'] > row['uband']:
+            return 1  # Sobrecompra: señal de venta
+        elif row['rsi'] < 35 or row['close'] < row['lband']:
+            return -1  # Sobreventa: señal de compra
         else:
             return np.nan
 
     df['signal_intraday'] = df.apply(signal, axis=1)
 
-    # Combinación con señal diaria (estrategia contraria)
+    # Combinación más flexible con señal diaria
     def combinacion(row):
-        if row['signal_daily'] == 1 and row['signal_intraday'] == 1:
-            return -1
-        elif row['signal_daily'] == -1 and row['signal_intraday'] == -1:
-            return 1
+        # Si hay señal diaria, la usamos directamente
+        if pd.notna(row['signal_daily']):
+            return -row['signal_daily']  # Estrategia contraria
+        # Si no hay señal diaria pero hay señal intradía, la usamos
+        elif pd.notna(row['signal_intraday']):
+            return -row['signal_intraday']  # Estrategia contraria
         else:
             return np.nan
 
